@@ -154,10 +154,18 @@ class Mediaset(rutils.RUtils):
             "format": "json"}
         res = self.createRequest(
             "https://login.mediaset.it/accounts.login", post=data)
-         # Controlla se il CAPTCHA è richiesto
-    if "captcha" in res.text:
-        self.log('CAPTCHA richiesto :(.', 4)
-        # Mostra un messaggio all'utente per completare il CAPTCHA
+        if "captcha" in res.text:
+        self.log('CAPTCHA required. Please complete it in your browser.', 4)
+        
+        # Mostra un messaggio all'utente
+        xbmcgui.Dialog().ok("CAPTCHA Required", 
+                             "A CAPTCHA is required to continue. Please complete it in your browser.\n"
+                             "After completing the CAPTCHA, return to the addon and try again.")
+        
+        # Puoi anche fornire un link al sito
+        xbmcgui.Dialog().ok("Link to Site", 
+                             "Visit: https://mediasetinfinity.mediaset.it/ to complete the CAPTCHA.")
+        
         return False
         s = res.text.strip().replace('gigya.callback(', '', 1)
         if s[-1:] == ';':
