@@ -154,6 +154,11 @@ class Mediaset(rutils.RUtils):
             "format": "json"}
         res = self.createRequest(
             "https://login.mediaset.it/accounts.login", post=data)
+         # Controlla se il CAPTCHA è richiesto
+    if "captcha" in res.text:
+        self.log('CAPTCHA richiesto :(.', 4)
+        # Mostra un messaggio all'utente per completare il CAPTCHA
+        return False
         s = res.text.strip().replace('gigya.callback(', '', 1)
         if s[-1:] == ';':
             s = s[:-1]
