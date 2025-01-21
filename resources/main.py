@@ -12,7 +12,8 @@ class KodiMediaset(object):
         self.med.log = kodiutils.log
         self.iperpage = int(kodiutils.getSetting('itemsperpage'))
         self.ua = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                   '(KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36')
+            '(KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36')
+
 
     def __imposta_range(self, start):
         limit = '{}-{}'.format(start, start + self.iperpage-1)
